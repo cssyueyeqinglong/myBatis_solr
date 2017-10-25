@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cy.mybatis.mapper.UserMapper">
+
+    <sql id="query_user_where">
+        <where>
+            <if test="username != null and username != ''">
+                and username like '%${username}%'
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex=#{sex}
+            </if>
+        </where>
+    </sql>
+
+    <!-- 根据id获取用户信息 -->
+    <select id="findUserById" parameterType="int" resultType="com.cy.mybatis.poj.User">
+        select * from user where id = #{id}
+    </select>
+    <!-- 自定义条件查询用户列表 -->
+    <select id="findUserByUsername" parameterType="java.lang.String"
+            resultType="com.cy.mybatis.poj.User">
+        select * from user where username like '%${value}%'
+    </select>
+
+    <insert id="insertUser" parameterType="com.cy.mybatis.poj.User">
+
+        <!--/*自增主键返回：
+        当主键是uuid时
+        <selectKey resultType="java.lang.String" order="BEFORE"
+         keyProperty="id">
+         select uuid()
+            </selectKey>
+*/ -->
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            select LAST_INSERT_ID()
+        </selectKey>
+        insert into user(username,birthday,sex,address) VALUES (#{username},#{birthday},#{sex},#{address})
+    </insert>
+
+
+    <!-- 一对一:手动映射 -->
+    <!--
+    id:resultMap的唯一标识
+    type:将查询出的数据放入这个指定的对象中
+    注意:手动映射需要指定数据库中表的字段名与java中pojo类的属性名称的对应关系
+     -->
+    <resultMap type="com.cy.mybatis.poj.Orders" id="orderAndUserResultMap">
+        <!-- id标签指定主键字段对应关系
+        column:列,数据库中的字段名称
+        property:属性,java中pojo中的属性名称
+         -->
+        <id column="id" property="id"/>
+
+        <!-- result:标签指定非主键字段的对应关系 -->
+        <result column="user_id" property="userId"/>
+        <result column="number" property="number"/>
+        <result column="createtime" property="createtime"/>
+        <result column="note" property="note"/>
+
+        <!-- 这个标签指定单个对象的对应关系
+        property:指定将数据放入Orders中的user属性中
+        javaType:user属性的类型
+        -->
+        <association property="user" javaType="com.cy.mybatis.poj.User">
+            <id column="uid" property="id"/>
+            <result column="username" property="username"/>
+            <result column="birthday" property="birthday"/>
+            <result column="sex" property="sex"/>
+            <result column="address" property="address"/>
+        </association>
+    </resultMap>
+    <select id="findOrdersAndUser" resultMap="orderAndUserResultMap">
+        select a.*, b.id uid, username, birthday, sex, address
+        from orders a, user b
+        where a.user_id = b.id
+    </select>
+</mapper>

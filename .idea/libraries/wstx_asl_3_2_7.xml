@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="wstx-asl-3.2.7">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/wstx-asl-3.2.7.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/zookeeper-3.4.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

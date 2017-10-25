@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="jsp-api">
+    <CLASSES>
+      <root url="jar://D:/BaiduYunDownload/base/day08-xml&amp;tomcat/resource/软件/tomcat/apache-tomcat-7.0.52/lib/jsp-api.jar!/" />
+      <root url="jar://D:/BaiduYunDownload/base/day08-xml&amp;tomcat/resource/软件/tomcat/apache-tomcat-7.0.52/lib/servlet-api.jar!/" />
+      <root url="jar://D:/BaiduYunDownload/base/day08-xml&amp;tomcat/resource/软件/tomcat/apache-tomcat-7.0.52/lib/tomcat-api.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

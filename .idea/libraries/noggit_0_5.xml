@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="noggit-0.5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/noggit-0.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/web/WEB-INF/lib/slf4j-log4j12-1.7.6.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
